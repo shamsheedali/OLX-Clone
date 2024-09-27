@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { addDoc, collection, getFirestore } from "firebase/firestore/lite";
+import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,6 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 //sign-up function
 const signup = async(name, email, password, phoneNumber)=> {
@@ -49,6 +51,18 @@ const login = async(email, password) => {
     }
 }
 
+
+//addProduct function
+const addProduct = async(product) => {
+    try {
+        const res = await addDoc(collection(db, "products"), product);
+        console.log(product)
+        console.log("Product added with ID:", res.id);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 //logout function
 const logout = () => {
     signOut(auth);
@@ -58,5 +72,8 @@ export {
     signup,
     login,
     logout,
-    auth
+    auth,
+    addProduct,
+    storage,
+    db
 }

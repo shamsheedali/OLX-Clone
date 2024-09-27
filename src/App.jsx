@@ -29,7 +29,7 @@ const App = () => {
     <ContextProvider>
       <Routes>
         <Route path='/' element={<Homepage />} />
-        <Route path='/product' element={<ProductPage />} />
+        <Route path='/product/:id' element={<ProductPage />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/login' element={<LogIn />} />
         <Route path='/addproduct' element={<AddProductPage />} />

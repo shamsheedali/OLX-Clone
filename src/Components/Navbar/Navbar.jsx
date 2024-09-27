@@ -10,12 +10,14 @@ import myContext from "../../context/MyContext";
 import { logout } from "../../Firebase/firebase";
 
 const Navbar = () => {
-  const {logState} = useContext(myContext)
+  const { logState } = useContext(myContext);
   return (
     <div className="headerParentDiv">
       <div className="headerChildDiv">
         <div className="brandName">
-          <OlxLogo />
+          <Link to={"/"}>
+            <OlxLogo />
+          </Link>
         </div>
         <div className="placeSearch">
           <Search />
@@ -38,12 +40,17 @@ const Navbar = () => {
           <Arrow />
         </div>
         <div className="loginPage">
-          <span onClick={() => {logout()}}>{logState ? logState : "Login"}</span>
+          <span
+            onClick={() => {
+              logout();
+            }}
+          >
+            {logState ? logState : "Login"}
+          </span>
           <hr />
         </div>
 
-
-        <Link to={'/addproduct'} className="sellMenu">
+        <Link to={"/addproduct"} className="sellMenu">
           <SellButton />
           <div className="sellMenuContent">
             <SellButtonPlus />
