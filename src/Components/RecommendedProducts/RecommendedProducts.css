@@ -23,6 +23,7 @@
 
 .recommendations .cards {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .moreView .cards {

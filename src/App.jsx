@@ -8,6 +8,8 @@ import AddProductPage from './Pages/AddProductPage/AddProductPage'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './Firebase/firebase'
 import ContextProvider from './context/ContextProvider'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
 
@@ -27,6 +29,7 @@ const App = () => {
 
   return (
     <ContextProvider>
+      <ToastContainer theme='dark' />
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/product/:id' element={<ProductPage />} />

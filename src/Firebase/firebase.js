@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { addDoc, collection, getFirestore } from "firebase/firestore/lite";
 import { getStorage } from "firebase/storage";
+import { toast } from "react-toastify";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -34,10 +35,11 @@ const signup = async(name, email, password, phoneNumber)=> {
             phoneNumber
         });
         console.log("New User Signed in");
+        toast.success("SignUp Successfull");
         
     } catch (error) {
         console.log(error);
-        alert(error);
+        toast.error(error.code.split('/')[1].split('-').join(' '));
     }
 }
 
@@ -45,9 +47,10 @@ const signup = async(name, email, password, phoneNumber)=> {
 const login = async(email, password) => {
     try {
         await signInWithEmailAndPassword(auth, email, password);
+        toast.success("Login Successfull");
     } catch (error) {
         console.log(error);
-        alert(error)
+        toast.error(error.code.split('/')[1].split('-').join(' '));
     }
 }
 
@@ -58,14 +61,17 @@ const addProduct = async(product) => {
         const res = await addDoc(collection(db, "products"), product);
         console.log(product)
         console.log("Product added with ID:", res.id);
+        toast.success("Product added");
     } catch (error) {
         console.log(error);
+        toast.error(error.code.split('/')[1].split('-').join(' ')); 
     }
 }
 
 //logout function
 const logout = () => {
     signOut(auth);
+    toast.success("Logout Successfull");
 }
 
 export {
